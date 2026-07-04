@@ -7,7 +7,10 @@ function renderInventory() {
     list.innerHTML = player.inventory.map(id => {
         const fish = FISH_TYPES.find(f => f.id === id);
         const colour = RARITY_COLOURS?.[fish.rarity] || "#fff";
-        return `<span class="fish-slot" style="border-color:${colour}">${fish.name}</span>`;
+              const visual = fish.sprite
+            ? `<img src="${fish.sprite}" alt="${fish.name}" class=fish-icon>`
+            : fish.name;
+        return `<span class="fish-slot" style="--glow:${colour}">${visual}</span>`;
     }).join('');
 }
 

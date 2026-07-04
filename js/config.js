@@ -5,7 +5,7 @@ const FISH_TYPES = [
         rarity: "common",
         value: 2,
         colour: "#c0c0c0",
-        sprite: null
+        sprite: "images/minnow.png"
     },
     {
         id:"bass",
@@ -13,7 +13,7 @@ const FISH_TYPES = [
         rarity: "uncommon",
         value: 5,
         colour: "#4a7c3a",
-        sprite: null
+        sprite: "images/bass.png"
     },
     {
         id: "trout",
@@ -21,7 +21,7 @@ const FISH_TYPES = [
         rarity: "rare",
         value: 12,
         colour: "#e07a5f",
-        sprite: null
+        sprite: "images/trout.png"
     },
     {
         id: "pike",

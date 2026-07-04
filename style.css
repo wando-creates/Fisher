@@ -247,6 +247,12 @@ button:disabled {
                 opacity 0.6s ease;
 }
 
+.fish-icon {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+}
+
 @keyframes popIn {
     0% {transform: scale(0.5); opacity: 0;}
     60% {transform: scale(1.15); opacity: 1;}

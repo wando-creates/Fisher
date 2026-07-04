@@ -1,5 +1,5 @@
 const player = {
-    coins: 0,
+    coins: 999,
     inventory: [], //fish caught
 };
 

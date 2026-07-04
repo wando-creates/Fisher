@@ -37,6 +37,40 @@ function renderRodShop() {
     })
 }
 
+function flyCoinsToDisplay(count) {
+    const startRect = document.getElementById("sellBtn").getBoundingClientRect();
+    const endRec = document.getElementById("coins").getBoundingClientRect();
+
+    const startX = startRect.left + startRect.width /2;
+    const startY = startRect.top + startRect.height/2;
+    const endX = endRec.left + endRec.width/2;
+    const endY = endRec.top + endRec.height/2;
+
+    const num = Math.min(count, 8);
+
+    for (let i=0; i < num; i ++) {
+        setTimeout(() => spawnCoin(startX, startY, endX, endY), i * 60);
+    }
+}
+
+function spawnCoin(x1,y1,x2,y2) {
+    const coin = document.createElement("div");
+    coin.className = "flying-coin";
+    coin.style.left = `${x1-8}px`;
+    coin.style.top = `${y1-8}px`;
+    document.body.appendChild(coin);
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            coin.style.left = `${x2 - 8}px`;
+            coin.style.top = `${y2-8}px`;
+            coin.style.transform = "scale(0.4)";
+            coin.style.opacity = "0.3";
+        });
+    });
+    setTimeout(() => coin.remove(), 650)
+}
+
 function renderLakeShop() {
     const panel = document.getElementById("shop-lakes");
     panel.innerHTML = "";
@@ -73,7 +107,12 @@ function renderLakeShop() {
     })
 }
 
-document.getElementById("sellBtn").onclick = sellAllFish;
+document.getElementById("sellBtn").onclick = () => {
+    const fishCount = player.inventory.length;
+    if (fishCount === 0) return;
+    flyCoinsToDisplay(fishCount);
+    sellAllFish();
+}
 
 document.getElementById("shopToggleBtn").onclick = () => {
     document.getElementById("shop-panel").classList.remove("hidden")

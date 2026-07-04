@@ -22,6 +22,38 @@ const FISH_TYPES = [
         value: 12,
         colour: "#e07a5f",
         sprite: null
+    },
+    {
+        id: "pike",
+        name: "Pike",
+        rarity: "rare",
+        value: 15,
+        colour: "#24410b",
+        sprite: null
+    },
+    {
+        id: "catfish",
+        name: "Catfish",
+        rarity: "epic",
+        value: 20,
+        colour: "#49818b",
+        sprite: null
+    },
+    {
+        id: "goldfish",
+        name: "Goldfish",
+        rarity: "rare",
+        value: 20,
+        colour: "#ad853a",
+        sprite: null
+    },
+    {
+        id: "koi",
+        name: "Koi Fish",
+        rarity: "epic",
+        value: 25,
+        colour: "#792626",
+        sprite: null
     }
 ]
 
@@ -44,6 +76,18 @@ const RODS = [
         cost: 60, 
         rareBonus: 0.25
     },
+    {
+        id: "carbon",
+        name: "Carbon Rod",
+        cost: 100,
+        rareBonus: 0.3
+    },
+    {
+        id: "epicrod",
+        name: "Epic Rod",
+        cost: 150,
+        rareBonus: 0.4
+    }
 ];
 
 const LAKES = [
@@ -58,13 +102,21 @@ const LAKES = [
         id: "river",
         name: "Rapid River",
         unlockCost: 50,
-        fishIds: ["bass", "trout"],
-        bgColour: "#206a4a"       
+        fishIds: ["bass", "trout", "pike", "catfish"],
+        bgColour: "#07ae9d"       
+    },
+    {
+        id: "bigpond",
+        name: "Large Pond",
+        unlockCost: 300,
+        fishIds: ["pike", "catfish", "goldfish", "koi"],
+        bgColour: "#172aa6"
     }
 ]
 
 const RARITY_COLOURS = {
     common: "#ffffff",
     uncommon: "#4ade80",
-    rare: "#008cff"
+    rare: "#008cff",
+    epic: "#a913bc"
 }

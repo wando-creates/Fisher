@@ -62,3 +62,9 @@ const LAKES = [
         bgColour: "#206a4a"       
     }
 ]
+
+const RARITY_COLOURS = {
+    common: "#ffffff",
+    uncommon: "#4ade80",
+    rare: "#008cff"
+}

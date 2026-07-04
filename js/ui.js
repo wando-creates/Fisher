@@ -1,8 +1,14 @@
 function renderInventory() {
     const list = document.getElementById("inventory");
-    list.innerHTML = player.inventory
-        .map(id => FISH_TYPES.find(f => f.id === id).name)
-        .join(', ') || "Empty - Go Catch Something!"
+    if (player.inventory.length === 0) {
+        list.innerHTML = "Empty"
+        return;
+    }
+    list.innerHTML = player.inventory.map(id => {
+        const fish = FISH_TYPES.find(f => f.id === id);
+        const colour = RARITY_COLOURS?.[fish.rarity] || "#fff";
+        return `<span class="fish-slot" style="border-color:${colour}">${fish.name}</span>`;
+    }).join('');
 }
 
 function renderCoins() {
@@ -70,11 +76,11 @@ function renderLakeShop() {
 document.getElementById("sellBtn").onclick = sellAllFish;
 
 document.getElementById("shopToggleBtn").onclick = () => {
-    document.getElementById("shop-modal").classList.remove("hidden")
+    document.getElementById("shop-panel").classList.remove("hidden")
 }
 
 document.getElementById("closeShopBtn").onclick = () => {
-    document.getElementById("shop-modal").classList.add("hidden")
+    document.getElementById("shop-panel").classList.add("hidden")
 }
 
 document.getElementById("tabRods").onclick = () => switchTab("rods");

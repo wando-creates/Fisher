@@ -6,7 +6,31 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <canvas id ="game" width="800" height="500"></canvas>
+        <div id="game-layout">
+            <div id="hud">
+                <div id="coins">Coins: 0</div>
+                <button id="shopToggleBtn">Shop</button>
+            </div>
+
+            <div id="inventory-panel">
+                <h3>Inventory</h3>
+                <div id="inventory"></div>
+                <button id="sellBtn">Sell All Fish</button>
+            </div>
+            
+            <canvas id ="game" width="800" height="500"></canvas>
+
+            <div id="shop-modal" class="hidden">
+                <div id="shop-tabs">
+                    <button id="tabRods" class="tab active">Rods</button>
+                    <button id="tabLakes" class="tab">Lakes</button>
+                    <button id="closeShopBtn">x</button>
+                </div>
+                <div id="shop-rods" class="shop-panel"></div>
+                <div id="shop-lakes" class="shop-panel hidden"></div>
+            </div>
+        </div>
+
 
         <script src="js/config.js"></script>
         <script src="js/assets.js"></script>

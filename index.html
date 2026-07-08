@@ -18,7 +18,11 @@
                 <button id="sellBtn">Sell All Fish</button>
             </div>
             <div id="canvas-wrap">
-                <canvas id ="game" width="800" height="500"></canvas>
+                <div id ="canvas-stack">
+                    <canvas id="water-canvas" width="800" height="500"></canvas>
+                    <canvas id ="game" width="800" height="500"></canvas>
+                </div>
+               
                 <div id="fishing-status"></div>    
             </div>
 
@@ -40,6 +44,7 @@
         <script src="js/render.js"></script>
         <script src="js/fishing.js"></script>
         <script src="js/ui.js"></script>
+        <script src="js/water.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

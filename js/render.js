@@ -1,10 +1,6 @@
 function render(ctx,canvas) {
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    const lake = LAKES.find(l => l.id === player.currentLakeId);
-    //water placeholder
-    ctx.fillStyle = lake.bgColour
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
+    
     if (isCasting) {
         drawBobber(ctx, canvas);
     }
@@ -19,15 +15,7 @@ function drawBobber(ctx, canvas) {
     //bobbing motion
     const bobOffset = Math.sin(castTimer * 8) * 6
     const y = baseY  +bobOffset
-
-    //ripples
-    const rippleRadius = (castTimer % 1)*25;
-    ctx.beginPath();
-    ctx.arc(x,y+10,rippleRadius,0,Math.PI*2);
-    ctx.strokeStyle = `rgba(255,255,255,${1-rippleRadius/25})`;
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
+    
     //fishingline
     ctx.strokeStyle = "#222"
     ctx.lineWidth = 2;

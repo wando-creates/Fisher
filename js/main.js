@@ -7,6 +7,7 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
 
     update(dt);
+    renderWater();
     render(ctx, canvas);
     requestAnimationFrame(gameLoop);
 

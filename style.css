@@ -18,6 +18,25 @@ body {
     padding: 20px;
 }
 
+#canvas-stack {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#canvas-stack canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#game {
+    background: transparent;
+}
+
+
 #game-layout {
     display: grid;
     grid-template-columns: 220px 800px 120px;

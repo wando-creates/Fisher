@@ -3,14 +3,17 @@ let castTimer = 0;
 const CAST_DURATION = 1.5;
 let rippleTimer = 0;
 
-function castLine() {
+let bobberX = 0;
+let bobberY = 0;
+
+function castLine(x,y) {
     if (isCasting) return;
     isCasting = true;
     castTimer = 0;
     rippleTimer =0;
 
-    const bobberX = canvas.width/2;
-    const bobberY = canvas.height/2;
+    bobberX = x;
+    bobberY = y;
     spawnRipple(bobberX,bobberY, 2.0);
 }
 
@@ -19,9 +22,8 @@ function updateFishing(dt) {
     castTimer += dt;
     rippleTimer +=dt;
 
-    const bobberX = canvas.width/2;
     const bobOffset = Math.sin(castTimer * 8) * 6;
-    const bobberY = canvas.height/2 + bobOffset;
+    const currentY = bobberY + bobOffset;
 
     if (rippleTimer > 0.3) {
         spawnRipple(bobberX, bobberY, 0.3);

@@ -19,12 +19,40 @@ const fragmentSrc = `
     uniform vec4 u_ripples[12];
     uniform int u_rippleCount;
     
+    vec2 hash22(vec2 p) {
+        float n = sin(dot(p, vec2(41.0, 289.0)));
+        return fract(vec2(262144.0, 32768.0) * n);
+    }
+
+    float voronoiEdges(vec2 uv) {
+        vec2 cellId = floor(uv);
+        vec2 f = fract(uv);
+        
+        float minDist1 = 4.0;
+        float minDist2 = 4.0;
+        
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x<=1; x++) {
+                vec2 neighbor = vec2(float(x), float(y));
+                vec2 point = hash22(cellId + neighbor);
+                vec2 diff = neighbor + point - f;
+                float dist = length(diff);
+                
+                if (dist <minDist1) {
+                    minDist2 = minDist1;
+                    minDist1 = dist;
+                } else if (dist < minDist2) {
+                    minDist2 = dist;
+                }
+            }
+        }
+        return minDist2 - minDist1;
+    }
     void main() {
         vec2 uv = gl_FragCoord.xy;
         uv.y = u_resolution.y - uv.y;
         
         float height = 0.0;
-        
         for (int i=0; i<12; i++) {
             if (i>= u_rippleCount) break;
             vec2 pos = u_ripples[i].xy;
@@ -45,8 +73,17 @@ const fragmentSrc = `
         // gentle constant motion
         float ambient = sin(uv.x * 0.02 + u_time * 0.5) * 0.015 // horizontal waves
                         + sin(uv.y * 0.03 - u_time * 0.3) * 0.015; //verticle waves
+
+        vec2 distortion = vec2(height, height) * 4.0;
+        vec2 causticUV = (uv+distortion) * 0.01 + vec2(u_time * 0.06, u_time * 0.06);
+        float edge = voronoiEdges(causticUV);
+        float mesh = smoothstep(0.05, 0.0, edge);
+
+        float meshBrightness = 0.15 + abs(height) * 0.4;
+        vec3 causticColor = u_baseColor + mesh * meshBrightness;
+
         height += ambient;
-        vec3 color = u_baseColor + height * 0.2; // different colours at different heights of the waves
+        vec3 color = causticColor + height * 0.1; // different colours at different heights of the waves
 
         gl_FragColor = vec4(color, 1.0);
     }

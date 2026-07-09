@@ -7,15 +7,10 @@ function render(ctx,canvas) {
 }
 
 function drawBobber(ctx, canvas) {
-    const x = canvas.width/2
-    const baseY = canvas.height/2
+    const x = bobberX;
+    const bobOffset = Math.sin(castTimer * 8) * 6;
+    const y = bobberY + bobOffset;
 
-
-
-    //bobbing motion
-    const bobOffset = Math.sin(castTimer * 8) * 6
-    const y = baseY  +bobOffset
-    
     //fishingline
     ctx.strokeStyle = "#222"
     ctx.lineWidth = 2;

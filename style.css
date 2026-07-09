@@ -20,16 +20,29 @@ body {
 
 #canvas-stack {
     position: relative;
-    width: 800px;
-    height: 500px;
+    width: 50vw;
+    aspect-ratio: 8/5;
+    position: relative;
     border-radius: 8px;
     overflow: hidden;
 }
 
 #canvas-stack canvas {
     position: absolute;
-    top: 0;
-    left: 0;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    clip-path: circle(35% at 35% center);
+}
+
+#canvas-wrap {
+    grid-area: canvas;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: url("images/raa.png") repeat;
+    padding: 20px;
+    border-radius: 12px;
 }
 
 #game {
@@ -39,7 +52,7 @@ body {
 
 #game-layout {
     display: grid;
-    grid-template-columns: 220px 800px 120px;
+    grid-template-columns: 220px 1fr 120px;
     grid-template-rows: auto 500px;
     grid-template-areas:
         "hud hud hud"
@@ -80,20 +93,25 @@ canvas {
     width: 1115px;
 }
 
+.coin-icon {
+    width: 48px;
+    height: 48px;
+}
+
 #coins {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     background: linear-gradient(180deg, #ffe066 0%, #f5b800 100%);
     color: rgb(255, 255, 255);
     padding: 8px 16px;
     border-radius: 6px;
     font-weight: bold;
+    font-size: 28px;
     box-shadow: 
         inset 0 2px 0 rgba(255,255,255,0.5),
         0 4px 0 #b38600,
         0 5px 8px rgba(0,0,0,0.25);
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
 }
 
 .panel-header {
@@ -114,7 +132,7 @@ button {
     border: none;
     border-radius: 6px;
     padding: 8px 14px;
-    font-size: 14px;
+    font-size: 28px;
     font-weight: 800;
     letter-spacing: 0.03em;
     color: white;
@@ -194,7 +212,7 @@ button:disabled {
     border-radius: 10px;
     padding: 16px;
     border: 4px solid #1a3426;
-    width: 250px;
+    width: 350px;
     box-shadow: 
         inset 0 0 0 3px #4a6367,
         0 8px 0 rgba(0,0,0,0.3),

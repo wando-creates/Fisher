@@ -62,31 +62,36 @@ const RODS = [
         id: "stick",
         name: "Old Stick", 
         cost: 0, 
-        rareBonus: 0
+        rareBonus: 0,
+        castSpeed: 1.0
     },
     {
         id: "basic", 
         name: "Basic Rod", 
         cost: 20, 
-        rareBonus: 0.1
+        rareBonus: 0.1,
+        castSpeed: 0.9,
     },
     {
         id: "Steel", 
         name: "Steel Rod", 
         cost: 60, 
-        rareBonus: 0.25
+        rareBonus: 0.25,
+        castSpeed: 0.75,
     },
     {
         id: "carbon",
         name: "Carbon Rod",
         cost: 100,
-        rareBonus: 0.3
+        rareBonus: 0.3,
+        castSpeed: 0.6
     },
     {
         id: "epicrod",
         name: "Epic Rod",
         cost: 150,
-        rareBonus: 0.4
+        rareBonus: 0.4,
+        castSpeed: 0.4,
     }
 ];
 

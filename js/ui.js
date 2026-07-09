@@ -15,7 +15,7 @@ function renderInventory() {
 }
 
 function renderCoins() {
-    document.getElementById("coins").textContent = `Coins: ${player.coins}`;
+    document.getElementById("coin-text").textContent = player.coins;
 }
 
 function renderRodShop() {

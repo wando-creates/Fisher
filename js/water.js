@@ -64,18 +64,21 @@ const fragmentSrc = `
             float dist = distance(uv,pos);
             
             // the actual wave formula
-            float wave = sin(dist * 0.1 - age * 5.0)
-                    * exp(-age*1.5) //makes the wave weaker the older it is 
-                    * exp(-dist * 0.02) //makes the wave weaker the further away from the center
-                    * strength;
-            height += wave;
-        }
-        // gentle constant motion
-        float ambient = sin(uv.x * 0.02 + u_time * 0.5) * 0.015 // horizontal waves
-                        + sin(uv.y * 0.03 - u_time * 0.3) * 0.015; //verticle waves
+            float radius = age * 80.0;
+            float ringWidth = 12.0;
 
-        vec2 distortion = vec2(height, height) * 4.0;
-        vec2 causticUV = (uv+distortion) * 0.01 + vec2(u_time * 0.06, u_time * 0.06);
+            float edgeDist = abs(dist - radius);
+            float ring = smoothstep(ringWidth, 0.0, edgeDist);
+            ring *= (1.0 - age/2.0) * strength;
+            height += ring;
+        }
+        height = clamp(height, 0.0, 1.0);
+        // gentle constant motion
+        float ambient = sin(uv.x * 0.02 + u_time * 0.8) * 0.001; // horizontal waves
+                        + sin(uv.y * 0.03 - u_time * 0.8) * 0.001; //verticle waves
+
+        vec2 distortion = vec2(height, height) * 2.0;
+        vec2 causticUV = (uv+distortion) * 0.01 + vec2(u_time * 0.06, u_time * 0.02);
         float edge = voronoiEdges(causticUV);
         float mesh = smoothstep(0.05, 0.0, edge);
 
@@ -169,5 +172,6 @@ function renderWater() {
     });
     gl.uniform4fv(u_ripples,rippledata);
     gl.viewport(0,0,waterCanvas.width, waterCanvas.height);
+    gl.uniform2f(u_resolution, waterCanvas.width, waterCanvas.height);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 }

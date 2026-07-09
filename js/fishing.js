@@ -6,6 +6,25 @@ let rippleTimer = 0;
 let bobberX = 0;
 let bobberY = 0;
 
+let fishShadows = [];
+
+function spawnFishShadows() {
+    const side = Math.random() < 0.5 ? "left" : "right";
+    const available = getAvailableFish();
+    const type = available[Math.floor(Math.random() * available.length)];
+
+    fishShadows.push({
+        x: side==="right" ? -80 : canvas.width + 80,
+        y: 120 + Math.random() * 220,
+
+        speed: 20 + Math.random() * 30,
+        size: 30 + Math.random() * 50,
+        direction: side==="right" ? 1 : -1,
+        bob:Math.random() * Math.PI*2,
+        image: fishImages[type.id]
+    });
+}
+
 function castLine(x,y) {
     if (isCasting) return;
     isCasting = true;
@@ -29,7 +48,10 @@ function updateFishing(dt) {
         spawnRipple(bobberX, bobberY, 0.3);
         rippleTimer = 0;
     }
-    if (castTimer >= CAST_DURATION) {
+
+    const effectiveDuration = CAST_DURATION * getCurrentRod().castSpeed;
+
+    if (castTimer >= effectiveDuration) {
         isCasting = false;
         const caught = pickCatch();
         console.log("caught: ", caught.name);
